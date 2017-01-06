@@ -8,12 +8,15 @@
     <!-- replace "jar" with "war" and -->
     <!-- comment ninja-standalone dependency and  -->
     <!-- uncomment the dependency for ninja-servlet -->
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+    <modules>
+        <module>mq-consumer</module>
+    </modules>
     <groupId>com.aaron</groupId>
     <version>1.0-SNAPSHOT</version>
 
     <url>http://www.ninjaframework.org</url>
-
+    <name>Project POM</name>
     <properties>
         <ninja.version>5.5.0</ninja.version>
         <jetty.version>9.2.10.v20150310</jetty.version>
