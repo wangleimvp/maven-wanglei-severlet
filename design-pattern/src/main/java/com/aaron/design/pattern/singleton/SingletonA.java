@@ -8,7 +8,7 @@ public class SingletonA {
 
     private static SingletonA singleton = new SingletonA();
 
-    public static SingletonA gegetInstance(){
+    public static SingletonA getInstance() {
         return singleton;
     }
 }
