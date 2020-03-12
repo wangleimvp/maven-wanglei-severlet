@@ -8,11 +8,11 @@ public class Director {
 
     private AbstractBuilder builder;
 
-    public Director(AbstractBuilder builder){
+    public Director(AbstractBuilder builder) {
         this.builder = builder;
     }
 
-    public Product construct(){
+    public Product construct() {
         builder.buildPartA();
         builder.buildPartB();
         builder.buildPartC();

@@ -14,7 +14,7 @@ public abstract class AbstractBuilder {
 
     public abstract void buildPartC();
 
-    public Product getProduct(){
+    public Product getProduct() {
         return product;
     }
 
