@@ -10,9 +10,4 @@ public class ConcreteFactory1 extends AbstractFactory {
         System.out.println("具体工厂1生成-->具体产品1...");
         return new ConcreteProduct1();
     }
-
-    public  Product getProduct2() {
-        System.out.println("具体工厂1生成-->具体产品2...");
-        return new ConcreteProduct2();
-    }
 }

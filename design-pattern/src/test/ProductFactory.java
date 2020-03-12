@@ -1,4 +1,7 @@
 import com.aaron.design.pattern.factory.*;
+import com.google.common.collect.Lists;
+
+import java.util.List;
 
 /**
  * Author wanglei
@@ -13,5 +16,9 @@ public class ProductFactory {
         Product product2 = factory2.newProduct();
         Product product3 = factory3.newProduct1();
         Product product4 = factory3.newProduct2();
+        List<Product> products = Lists.newArrayList(product1, product2, product3, product4);
+        for (Product product : products) {
+            product.show();
+        }
     }
 }
