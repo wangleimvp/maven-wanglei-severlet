@@ -3,7 +3,7 @@ package com.aaron.design.pattern.singleton;
 /**
  * Author wanglei
  * Created on 2020-3-12
- * 利用了静态类的懒加载，和类构造器初始化的线程同步
+ * 利用了静态类的懒加载，和类加载线程同步
  */
 public class StaticInnerClass {
 
