@@ -1,5 +1,4 @@
-import com.aaron.design.pattern.factory.Product;
-import com.aaron.design.pattern.factory.other.*;
+import com.aaron.design.pattern.creational.factory.other.*;
 
 /**
  * Author wanglei

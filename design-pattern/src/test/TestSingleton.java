@@ -1,4 +1,4 @@
-import com.aaron.design.pattern.singleton.EnumSingleton;
+import com.aaron.design.pattern.creational.singleton.EnumSingleton;
 
 public class TestSingleton {
     public static void main(String[] args) {

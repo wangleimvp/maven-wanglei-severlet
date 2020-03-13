@@ -1,4 +1,4 @@
-import com.aaron.design.pattern.factory.*;
+import com.aaron.design.pattern.creational.factory.*;
 import com.google.common.collect.Lists;
 
 import java.util.List;

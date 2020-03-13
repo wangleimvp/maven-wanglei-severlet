@@ -1,6 +1,5 @@
-import com.aaron.design.pattern.prototype.Circle;
-import com.aaron.design.pattern.prototype.ProtoTypeManager;
-import com.aaron.design.pattern.prototype.Shape;
+import com.aaron.design.pattern.creational.prototype.ProtoTypeManager;
+import com.aaron.design.pattern.creational.prototype.Shape;
 
 /**
  * Author wanglei
