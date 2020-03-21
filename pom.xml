@@ -12,6 +12,7 @@
     <modules>
         <module>mq-consumer</module>
         <module>design-pattern</module>
+        <module>application-server</module>
     </modules>
     <groupId>com.aaron</groupId>
     <version>1.0-SNAPSHOT</version>
