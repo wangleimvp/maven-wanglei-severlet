@@ -59,6 +59,6 @@
 
 </script>
 请输入：<textarea rows="5" cols="10" id="inputMsg" name="inputMsg"></textarea>
-<button οnclick="doSend();">发送</button>
+<button onclick="doSend();">发送</button>
 </body>
 </html>

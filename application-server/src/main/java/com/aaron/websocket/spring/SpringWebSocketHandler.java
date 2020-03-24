@@ -55,7 +55,8 @@ public class SpringWebSocketHandler extends TextWebSocketHandler {
      * js调用websocket.send时候，会调用该方法
      */
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        super.handleTextMessage(session, message);
+//        super.handleTextMessage(session, message);
+        sendMessageToUsers(message);
     }
 
     /**
