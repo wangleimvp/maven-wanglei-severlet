@@ -1,4 +1,4 @@
-package com.aaron.websocket;
+package com.aaron.websocket.tomcat;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
