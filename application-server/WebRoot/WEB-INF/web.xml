@@ -5,34 +5,42 @@
          version="4.0">
     <!-- 项目名称 -->
     <display-name>Archetype Created Web Application</display-name>
-
-    <!-- 配置spring-servlet  开始  -->
+    <!-- 配置spring-servlet开始 -->
     <servlet>
         <servlet-name>spring</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <!-- 配置spring-servlet的一个初始化参数：配置spring-mvc配置文件的位置和参数-->
-
-        <!--
-              实际上也可以不通过contextConfigLocation来配置springmvc的配置文件
-              默认的配置文件为:/WEB-INF/<servlet-name>-servlet.xml
-         -->
+        <!-- 实际上也可以不通过contextConfigLocation来配置springmvc的配置文件
+              默认的配置文件为:/WEB-INF/<servlet-name>-servlet.xml -->
         <init-param>
-          <param-name>contextConfigLocation</param-name>
-          <param-value>/WEB-INF/spring-servlet.xml</param-value>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>spring</servlet-name>
-        <!--  所有请求  -->
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
-
+    <!-- 结束 -->
+    <!--    servlet过滤器-->
+    <filter>
+        <filter-name>LogFilter</filter-name>
+        <filter-class>com.aaron.servlet.LogFilter</filter-class>
+        <init-param>
+            <param-name>Site</param-name>
+            <param-value>localhost:8080/servlet/test</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>LogFilter</filter-name>
+        <url-pattern>/servlet/*</url-pattern>
+    </filter-mapping>
+    <!-- 配置自定义servlet开始 -->
     <servlet>
         <servlet-name>HelloWorld</servlet-name>
         <servlet-class>com.aaron.servlet.HelloWorld</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>HelloWorld</servlet-name>
         <url-pattern>/servlet/HelloWorld</url-pattern>
@@ -47,4 +55,78 @@
         <url-pattern>/servlet/HelloForm</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DisplayHeader</servlet-name>
+        <servlet-class>com.aaron.servlet.DisplayHeader</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DisplayHeader</servlet-name>
+        <url-pattern>/servlet/DisplayHeader</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Refresh</servlet-name>
+        <servlet-class>com.aaron.servlet.Refresh</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Refresh</servlet-name>
+        <url-pattern>/servlet/Refresh</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReadCookies</servlet-name>
+        <servlet-class>com.aaron.servlet.ReadCookies</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReadCookies</servlet-name>
+        <url-pattern>/servlet/ReadCookies</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SessionTrack</servlet-name>
+        <servlet-class>com.aaron.servlet.SessionTrack</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SessionTrack</servlet-name>
+        <url-pattern>/servlet/SessionTrack</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UploadFile</servlet-name>
+        <servlet-class>com.aaron.servlet.UploadFile</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UploadFile</servlet-name>
+        <url-pattern>/servlet/UploadFile</url-pattern>
+    </servlet-mapping>
+
+    <!-- servlet 异常处理-->
+    <servlet>
+        <servlet-name>ErrorHandler</servlet-name>
+        <servlet-class>com.aaron.servlet.ErrorHandler</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ErrorHandler</servlet-name>
+        <url-pattern>/servlet/ErrorHandler</url-pattern>
+    </servlet-mapping>
+    <!-- error-code 相关的错误页面 -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/servlet/ErrorHandler</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/servlet/ErrorHandler</location>
+    </error-page>
+    <!-- exception-type 相关的错误页面 -->
+    <error-page>
+        <exception-type>javax.servlet.ServletException</exception-type>
+        <location>/servlet/ErrorHandler</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.io.IOException</exception-type>
+        <location>/servlet/ErrorHandler</location>
+    </error-page>
+    <!-- 结束 -->
 </web-app>

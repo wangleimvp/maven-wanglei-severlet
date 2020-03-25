@@ -1,11 +1,13 @@
 package com.aaron.servlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 
 /**
  * Author wanglei
@@ -27,7 +29,22 @@ public class HelloForm extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response) throws ServletException, IOException {
+        // 为名字和姓氏创建 Cookie
+        Cookie nameCookie = new Cookie("name",
+                URLEncoder.encode(request.getParameter("name"), "UTF-8")); // 中文转码
+        Cookie urlCookie = new Cookie("url",
+                request.getParameter("url"));
+
+        // 为两个 Cookie 设置过期日期为 24 小时后
+        nameCookie.setMaxAge(60*60*24);
+        urlCookie.setMaxAge(60*60*24);
+
+        // 在响应头中添加两个 Cookie
+        response.addCookie( nameCookie );
+        response.addCookie( urlCookie );
+
         // 设置响应内容类型
         response.setContentType("text/html;charset=UTF-8");
 
@@ -48,6 +65,7 @@ public class HelloForm extends HttpServlet {
                 "  <li><b>网址</b>："
                 + request.getParameter("url") + "\n" +
                 "</ul>\n" +
+                "<a href=\"/servlet/ReadCookies\">ReadCookies 测试</a><br/>" +
                 "</body></html>");
     }
 
