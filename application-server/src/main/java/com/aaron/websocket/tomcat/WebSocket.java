@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Author wanglei
  * Created on 2020-03-23
  */
-@ServerEndpoint("/webSocketByTomcat/{username}")
+@ServerEndpoint("/websocket/webSocketByTomcat/{username}")
 public class WebSocket {
 
     private static int onlineCount = 0;

@@ -22,7 +22,7 @@ public class WebsocketController {
     @Autowired
     SpringWebSocketHandler springWebSocketHandler;
 
-    @RequestMapping("login")
+    @RequestMapping("/websocket/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String username = request.getParameter("username");
         System.out.println(username + "登录");
@@ -32,14 +32,14 @@ public class WebsocketController {
         return new ModelAndView("springSendMessage");
     }
 
-    @RequestMapping("send")
+    @RequestMapping("/websocket/send")
     @ResponseBody
     public void send(HttpServletRequest request) {
         String username = request.getParameter("username");
         springWebSocketHandler.sendMessageToUser(username, new TextMessage("你好，测试！！！！"));
     }
 
-    @RequestMapping("sendAll")
+    @RequestMapping("/websocket/sendAll")
     @ResponseBody
     public void sendAll(HttpServletRequest request) {
         springWebSocketHandler.sendMessageToUsers(new TextMessage("你好，测试！！！！"));

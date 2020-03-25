@@ -13,7 +13,7 @@ import java.io.IOException;
  * Created on 2020-03-23
  */
 @Controller
-@RequestMapping(value="/webSocketByTomcat/serviceToClient")
+@RequestMapping(value="/websocket/webSocketByTomcat/serviceToClient")
 public class ServiceClientByTomcatController {
 
     private WebSocket websocket = new WebSocket();

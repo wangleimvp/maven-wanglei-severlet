@@ -14,7 +14,7 @@ import java.io.IOException;
 @Controller
 public class HelloWorld {
 
-    @RequestMapping(value="/hello")
+    @RequestMapping(value="/websocket/hello")
     public void sendMsg(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("hello world");
     }
