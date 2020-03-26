@@ -30,8 +30,13 @@ public class NettySocket {
         logger.debug("start");
         Socket socket = new Socket();
         socket.connect(address);
-        byte[] output = new byte[]{(byte) 1, (byte) 0, (byte) 0, (byte) 0, (byte) 0};
-        socket.getOutputStream().write(output);
+        //LiveMessage 是 自定义协议内容，需要 byte, int, String
+        // byte 不好处理 int,String
+//         byte[] output = new byte[]{1, 0};
+        ByteBuffer byteBuffer = ByteBuffer.allocate(5);
+        byteBuffer.put((byte) 1);
+        byteBuffer.putInt(0);
+        socket.getOutputStream().write(byteBuffer.array());
         byte[] input = new byte[64];
         int readByte = socket.getInputStream().read(input);
         logger.debug("readByte " + readByte);
