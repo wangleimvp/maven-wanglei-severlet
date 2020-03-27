@@ -2,6 +2,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedInputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
@@ -32,17 +33,31 @@ public class NettySocket {
         socket.connect(address);
         //LiveMessage 是 自定义协议内容，需要 byte, int, String
         // byte 不好处理 int,String
-//         byte[] output = new byte[]{1, 0};
-        ByteBuffer byteBuffer = ByteBuffer.allocate(5);
+        ByteBuffer byteBuffer = ByteBuffer.allocate(25);
         byteBuffer.put((byte) 1);
         byteBuffer.putInt(0);
+//        String content = "客户端发送消息";
+//        byteBuffer.put(content.getBytes());
         socket.getOutputStream().write(byteBuffer.array());
-        byte[] input = new byte[64];
-        int readByte = socket.getInputStream().read(input);
-        logger.debug("readByte " + readByte);
-        for (int i = 0; i < readByte; i++) {
+        //socket客户端读数据
+        byte[] input = new byte[25];
+//        int readByte = socket.getInputStream().read(input);
+        byte[] temp = new byte[5];
+        BufferedInputStream in = new BufferedInputStream(socket.getInputStream());
+        int r = -1;
+        int index = 0;
+        while ((r = in.read(temp)) != -1) {
+            System.arraycopy(temp, 0, input, index, r);
+            index += r;
+            if(r < 5){
+                break;
+            }
+        }
+        logger.debug("readByte " + input.length);
+        for (int i = 0; i < input.length; i++) {
             logger.debug("read [" + i + "]:" + input[i]);
         }
+        logger.debug(new String(input));
         socket.close();
     }
 

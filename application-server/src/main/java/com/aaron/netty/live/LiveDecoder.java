@@ -33,7 +33,6 @@ public class LiveDecoder extends ReplayingDecoder<LiveDecoder.LiveState> {
                           ByteBuf byteBuf, List<Object> list) throws Exception {
         switch (state()) { // 4
             case TYPE:
-                message = new LiveMessage();
                 byte type = byteBuf.readByte();
                 logger.debug("type:" + type);
                 message.setType(type);
@@ -41,7 +40,6 @@ public class LiveDecoder extends ReplayingDecoder<LiveDecoder.LiveState> {
                 break;
             case LENGTH:
                 int length = byteBuf.readInt();
-                //TODO: 自己添加的
                 message.setLength(length);
                 if (length > 0) {
                     checkpoint(LiveState.CONTENT); // 5

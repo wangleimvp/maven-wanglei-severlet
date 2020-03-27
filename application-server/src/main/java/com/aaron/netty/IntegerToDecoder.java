@@ -10,7 +10,7 @@ import java.util.List;
  * Author wanglei
  * Created on 2020-03-26
  */
-public class ToIntegerDecoder extends ByteToMessageDecoder {
+public class IntegerToDecoder extends ByteToMessageDecoder {
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
         if (byteBuf.readableBytes() >= 4) {

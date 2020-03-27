@@ -17,7 +17,6 @@ public class LiveEncoder extends MessageToByteEncoder<LiveMessage> {
         byteBuf.writeInt(liveMessage.getLength());
         if (!StringUtil.isNullOrEmpty(liveMessage.getContent())) {
             byteBuf.writeBytes(liveMessage.getContent().getBytes());
-
         }
     }
 }
