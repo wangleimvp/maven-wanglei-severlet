@@ -20,7 +20,7 @@ public class ChatDecoder extends ByteToMessageDecoder {
 
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
-        byte[] bytes = new byte[21];
+        byte[] bytes = new byte[25];
         byteBuf.readBytes(bytes);
         String content = new String(bytes);
         logger.debug("decode: " + content);

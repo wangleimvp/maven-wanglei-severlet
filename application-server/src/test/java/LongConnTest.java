@@ -28,9 +28,10 @@ public class LongConnTest {
                 try {
                     byte[] input = new byte[64];
                     int readByte = socket.getInputStream().read(input);
-
-                    logger.debug("readByte " + readByte);
-                    logger.debug("String " + new String(input));
+                    if (readByte != -1) {
+                        logger.debug("readByte " + readByte);
+                        logger.debug("String " + new String(input));
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

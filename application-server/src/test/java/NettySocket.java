@@ -3,6 +3,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
@@ -21,10 +22,10 @@ public class NettySocket {
 
     private Logger logger = LoggerFactory.getLogger(NettySocket.class);
 
-    private SocketAddress address = new InetSocketAddress("localhost",9090);
+    private SocketAddress address = new InetSocketAddress("localhost", 9090);
 
     /**
-     *  Socket使用方式
+     * Socket使用方式
      */
     @Test
     public void testSocket() throws Exception {
@@ -34,35 +35,51 @@ public class NettySocket {
         //LiveMessage 是 自定义协议内容，需要 byte, int, String
         // byte 不好处理 int,String
         ByteBuffer byteBuffer = ByteBuffer.allocate(25);
-        byteBuffer.put((byte) 1);
-        byteBuffer.putInt(0);
-//        String content = "客户端发送消息";
-//        byteBuffer.put(content.getBytes());
+//        byteBuffer.put((byte) 1);
+//        byteBuffer.putInt(0);
+        String content = "客户端发送消息";
+        byteBuffer.put(content.getBytes());
         socket.getOutputStream().write(byteBuffer.array());
         //socket客户端读数据
-        byte[] input = new byte[25];
+        new Thread(() -> {
+            while (true) {
+                try {
+                    byte[] input = new byte[25];
 //        int readByte = socket.getInputStream().read(input);
-        byte[] temp = new byte[5];
-        BufferedInputStream in = new BufferedInputStream(socket.getInputStream());
-        int r = -1;
-        int index = 0;
-        while ((r = in.read(temp)) != -1) {
-            System.arraycopy(temp, 0, input, index, r);
-            index += r;
-            if(r < 5){
+                    byte[] temp = new byte[5];
+                    BufferedInputStream in = new BufferedInputStream(socket.getInputStream());
+                    int r = -1;
+                    int index = 0;
+                    while ((r = in.read(temp)) != -1) {
+                        System.arraycopy(temp, 0, input, index, r);
+                        index += r;
+                        if (r < 5) {
+                            break;
+                        }
+                    }
+                    for (int i = 0; i < input.length; i++) {
+                        if(input[i] == 0){
+                            break;
+                        }
+                        logger.debug("read [" + i + "]:" + input[i]);
+                        logger.debug("readByte " + input.length);
+                        logger.debug(new String(input));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        while (true) {
+            if (content == "0") {
                 break;
             }
         }
-        logger.debug("readByte " + input.length);
-        for (int i = 0; i < input.length; i++) {
-            logger.debug("read [" + i + "]:" + input[i]);
-        }
-        logger.debug(new String(input));
         socket.close();
     }
 
     /**
-     *  SocketChannel blocking
+     * SocketChannel blocking
      */
     @Test
     public void testSocketChannelBlock() throws Exception {
@@ -87,7 +104,7 @@ public class NettySocket {
     }
 
     /**
-     *  SocketChannel non-blocking
+     * SocketChannel non-blocking
      */
     @Test
     public void testSocketChannelConcurrent() throws Exception {
