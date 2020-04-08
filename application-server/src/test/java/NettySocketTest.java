@@ -18,9 +18,9 @@ import java.util.Set;
  * Author wanglei
  * Created on 2020-03-26
  */
-public class NettySocket {
+public class NettySocketTest {
 
-    private Logger logger = LoggerFactory.getLogger(NettySocket.class);
+    private Logger logger = LoggerFactory.getLogger(NettySocketTest.class);
 
     private SocketAddress address = new InetSocketAddress("localhost", 9090);
 
