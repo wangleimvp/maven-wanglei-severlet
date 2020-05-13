@@ -1,8 +1,8 @@
 package com.aaron.spring.controller;
 
 import com.aaron.spring.domain.Demo;
-import com.aaron.spring.service.HelloWorldService;
-import com.aaron.spring.service.SpringContextUtil;
+import com.aaron.spring.service.annotation.HelloWorldService;
+import com.aaron.spring.service.annotation.SpringContextUtil;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +24,10 @@ public class HelloWorld {
     public String sendMsg(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HelloWorldService aaa = (HelloWorldService) SpringContextUtil.getBean("helloWorldService");
         System.out.println(aaa.say());
+        Demo demo = (Demo) SpringContextUtil.getBean(Demo.class.getName());
+//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("demo.xml");
+//        Demo demo = (Demo) applicationContext.getBean(Demo.class.getName());
+        System.out.println(Demo.class.getName() + ":" + demo.getName() + "," + demo.getAge());
         return "0000, hello world !";
     }
 

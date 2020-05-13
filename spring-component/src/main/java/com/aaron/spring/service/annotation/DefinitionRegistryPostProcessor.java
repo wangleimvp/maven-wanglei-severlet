@@ -1,4 +1,4 @@
-package com.aaron.spring.service;
+package com.aaron.spring.service.annotation;
 
 import com.aaron.spring.annotation.MyAnnotation;
 import org.springframework.beans.BeansException;
