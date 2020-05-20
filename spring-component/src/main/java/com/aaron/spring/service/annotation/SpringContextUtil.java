@@ -5,6 +5,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+import java.lang.annotation.Annotation;
+import java.util.Map;
+
 /**
  * Author wanglei
  * Created on 2020-05-11
@@ -18,7 +21,7 @@ public class SpringContextUtil implements ApplicationContextAware {
     /**
      * 实现ApplicationContextAware接口的回调方法，设置上下文环境
      *
-     * @param applicationContext
+     * @param applicationContext 应用上下文
      */
     public void setApplicationContext(ApplicationContext applicationContext) {
         SpringContextUtil.applicationContext = applicationContext;
@@ -34,12 +37,25 @@ public class SpringContextUtil implements ApplicationContextAware {
     /**
      * 获取对象
      * 这里重写了bean方法，起主要作用
-     * @param name
+     *
+     * @param name 对象名称
      * @return Object 一个以所给名字注册的bean的实例
-     * @throws BeansException
+     * @throws BeansException 获取Bean时发生的异常
      */
     public static Object getBean(String name) throws BeansException {
         return applicationContext.getBean(name);
+    }
+
+    /**
+     * 获取指定注解修饰的对象
+     * 这里重写了bean方法，起主要作用
+     *
+     * @param annotationType 注解类型
+     * @return Map<String, Object> 返回指定注解对应的对象Map
+     * @throws BeansException 获取Bean时发生的异常
+     */
+    public static Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> annotationType) throws BeansException {
+        return applicationContext.getBeansWithAnnotation(annotationType);
     }
 
 }
